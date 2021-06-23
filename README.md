@@ -4,4 +4,3 @@ Playbook to create DecisionTree classifier from scikit-learn based on public pen
 Created Decision Tree Classifier and Logistic Regression Classifier.
 
 ![Decision Tree](penguins-dt.png)
-Format: ![Penguins](url)

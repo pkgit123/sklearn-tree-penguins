@@ -32,6 +32,18 @@
 # In[1]:
 
 
+# ! jupyter nbconvert --to script *.ipynb
+
+
+# In[ ]:
+
+
+
+
+
+# In[2]:
+
+
 import pandas as pd
 import numpy as np
 
@@ -46,7 +58,7 @@ import seaborn as sns
 print('Seaborn version: ', sns.__version__)
 
 
-# In[2]:
+# In[3]:
 
 
 # https://www.kaggle.com/hackspyder/decision-based-approach
@@ -62,7 +74,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 
-# In[3]:
+# In[4]:
 
 
 import os
@@ -74,7 +86,7 @@ import os
 
 
 
-# In[4]:
+# In[5]:
 
 
 # load penguins dataset
@@ -91,21 +103,21 @@ print(df_penguins_raw.info(), '\n')
 df_penguins_raw.head()
 
 
-# In[5]:
+# In[6]:
 
 
 # make copy for cleaning
 df_penguins = df_penguins_raw.copy()
 
 
-# In[6]:
+# In[7]:
 
 
 # Clean up null values: .dropna() of target variable
 df_penguins = df_penguins.dropna(subset=['sex'])
 
 
-# In[7]:
+# In[8]:
 
 
 # Clean up null values: .fillna() of numeric variable using .mean()
@@ -115,7 +127,7 @@ df_penguins['flipper_length_mm'].fillna(df_penguins['flipper_length_mm'].mean(),
 df_penguins['body_mass_g'].fillna(df_penguins['body_mass_g'].mean(), inplace=True)
 
 
-# In[8]:
+# In[9]:
 
 
 # add categorical bin for numeric
@@ -134,7 +146,7 @@ df_penguins[f'group_body_mass'] = pd.cut(df_penguins['body_mass_g'], bins=3)
 # * Scatterplots
 # * Histograms
 
-# In[9]:
+# In[10]:
 
 
 # pivot table to count categorical columns: island vs. gender
@@ -146,7 +158,7 @@ pt_island_gender = pd.pivot_table(df_penguins, values='species', index='island',
 pt_island_gender
 
 
-# In[10]:
+# In[11]:
 
 
 # pivot table to count categorical columns: species vs. gender
@@ -154,31 +166,31 @@ pt_island_gender = pd.pivot_table(df_penguins, values='island', index='species',
 pt_island_gender
 
 
-# In[11]:
+# In[12]:
 
 
 get_ipython().run_cell_magic('time', '', '\nx=\'bill_length_mm\'\ny=\'bill_depth_mm\'\nhue=\'species\'\ndata=df_penguins\n\nsns.scatterplot(data=data, x=x, y=y, hue=hue, x_jitter=True)\n\n# put a title\nplt.title(f"`{x}` vs. `{y}` with hue of `{hue}`")\n\n# Rotates X-Axis Ticks by 90-degrees\nplt.xticks(rotation = 90) \n\n# Put the legend out of the figure\nplt.legend(title=f"Legend: {hue}", bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)\n\nplt.show()\nprint()')
 
 
-# In[12]:
+# In[13]:
 
 
 get_ipython().run_cell_magic('time', '', '\nx=\'bill_length_mm\'\ny=\'bill_depth_mm\'\nhue=\'island\'\ndata=df_penguins\n\nsns.scatterplot(data=data, x=x, y=y, hue=hue, x_jitter=True)\n\n# put a title\nplt.title(f"`{x}` vs. `{y}` with hue of `{hue}`")\n\n# Rotates X-Axis Ticks by 90-degrees\nplt.xticks(rotation = 90) \n\n# Put the legend out of the figure\nplt.legend(title=f"Legend: {hue}", bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)\n\nplt.show()\nprint()')
 
 
-# In[13]:
+# In[14]:
 
 
 get_ipython().run_cell_magic('time', '', '\nx=\'bill_length_mm\'\ny=\'bill_depth_mm\'\nhue=\'sex\'\ndata=df_penguins\n\nsns.scatterplot(data=data, x=x, y=y, hue=hue, x_jitter=True)\n\n# put a title\nplt.title(f"`{x}` vs. `{y}` with hue of `{hue}`")\n\n# Rotates X-Axis Ticks by 90-degrees\nplt.xticks(rotation = 90) \n\n# Put the legend out of the figure\nplt.legend(title=f"Legend: {hue}", bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)\n\nplt.show()\nprint()')
 
 
-# In[14]:
+# In[15]:
 
 
 get_ipython().run_cell_magic('time', '', '\nx=\'bill_length_mm\'\ny=\'bill_depth_mm\'\nhue=\'group_body_mass\'\ndata=df_penguins\n\nsns.scatterplot(data=data, x=x, y=y, hue=hue, x_jitter=True)\n\n# put a title\nplt.title(f"`{x}` vs. `{y}` with hue of `{hue}`")\n\n# Rotates X-Axis Ticks by 90-degrees\nplt.xticks(rotation = 90) \n\n# Put the legend out of the figure\nplt.legend(title=f"Legend: {hue}", bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)\n\nplt.show()\nprint()')
 
 
-# In[15]:
+# In[16]:
 
 
 def plot_gb_pct_total(gb_col_name, str_col_name, df_input):
@@ -206,7 +218,7 @@ def plot_gb_pct_total(gb_col_name, str_col_name, df_input):
     print(dfu)
 
 
-# In[16]:
+# In[17]:
 
 
 # Check balanced categories: gender vs. island
@@ -217,7 +229,7 @@ plot_gb_pct_total(
 )
 
 
-# In[17]:
+# In[18]:
 
 
 # Check balanced categories: species vs. island
@@ -231,13 +243,13 @@ plot_gb_pct_total(
 )
 
 
-# In[18]:
+# In[19]:
 
 
 # bill_length_mm	bill_depth_mm	flipper_length_mm	body_mass_g
 
 
-# In[19]:
+# In[20]:
 
 
 x="bill_length_mm"
@@ -249,7 +261,7 @@ plt.title(f"Histogram of `{x}`")
 plt.show()
 
 
-# In[20]:
+# In[21]:
 
 
 x="bill_depth_mm"
@@ -261,7 +273,7 @@ plt.title(f"Histogram of `{x}`")
 plt.show()
 
 
-# In[21]:
+# In[22]:
 
 
 x="flipper_length_mm"
@@ -273,7 +285,7 @@ plt.title(f"Histogram of `{x}`")
 plt.show()
 
 
-# In[22]:
+# In[23]:
 
 
 x="body_mass_g"
@@ -293,7 +305,7 @@ plt.show()
 
 # ### Encode Columns (Categorical vs. Numeric)
 
-# In[23]:
+# In[24]:
 
 
 def encode_columns_split(
@@ -390,13 +402,13 @@ def encode_columns_split(
     return temp_df_final, target_var_output, target_output_categories
 
 
-# In[24]:
+# In[25]:
 
 
 df_penguins.head()
 
 
-# In[25]:
+# In[26]:
 
 
 # ===================================================
@@ -421,7 +433,7 @@ df_final_out, ls_target_train_out, ls_target_categories_out = encode_columns_spl
 )
 
 
-# In[26]:
+# In[27]:
 
 
 def build_decision_tree(train, target_train, tree_feature_names, tree_class_names, str_filename_output):
@@ -559,7 +571,7 @@ def build_decision_tree(train, target_train, tree_feature_names, tree_class_name
     plt.show()
 
 
-# In[27]:
+# In[28]:
 
 
 # ===================================================
@@ -573,6 +585,244 @@ build_decision_tree(
     tree_class_names = ls_target_categories_out,
     str_filename_output = "tree1"
 )
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ### Logistic Regression Model
+# * Test size
+# * Random state
+# * Hyperparameters
+
+# In[29]:
+
+
+from sklearn import preprocessing
+
+from sklearn.metrics import accuracy_score
+
+
+# In[30]:
+
+
+# Model Evaluation metrics 
+from sklearn.metrics import accuracy_score,recall_score,precision_score,f1_score
+
+# Logistic Regression Classifier Confusion matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+# scorers used for GridSearchCV
+from sklearn.metrics import SCORERS
+# print(sorted(sklearn.metrics.SCORERS.keys()))
+print("Scikit-learn Metrics SCORERS: ")
+print(sorted(SCORERS.keys()))
+
+# Grid Search
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+
+# https://scikit-learn.org/stable/modules/generated/sklearn.metrics.plot_confusion_matrix.html#sklearn.metrics.plot_confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
+
+# for the uniform method
+import scipy.stats as stats
+
+
+# In[31]:
+
+
+# Uppercase "X" is input matrix (matrix is multiple columns for input)
+X = df_final_out
+
+# Lowercase "y" is output vector (vector is single column for output)
+y = ls_target_train_out
+
+
+# In[32]:
+
+
+# =======================================================
+# Split our dataset into training data vs. test data
+# =======================================================
+
+# training data is data used to help the model learn
+# test data is data to evaluate whether the model did a good job learning
+# Ignore for now: validation data ... subset of training data that helps "tune" the model
+X_train_split, X_test_split, y_train_split, y_test_split = train_test_split(X, y, test_size=0.30, stratify=y, random_state=1)
+
+
+# In[33]:
+
+
+# scale the training data and transform, otherwise .fit() method fails
+scaler = preprocessing.StandardScaler().fit(X_train_split)
+X_train_scaled = scaler.transform(X_train_split)
+
+# use the same scaler to transform the test data
+X_test_scaled = scaler.transform(X_test_split)
+
+X_test_scaled[:5]
+
+
+# In[ ]:
+
+
+
+
+
+# In[34]:
+
+
+# instantiate logistic regression classifier (raw template)
+clf_lg = LogisticRegression(random_state=0)
+
+# fit the logistic regression classifier
+clf_lg_fit = clf_lg.fit(X_train_scaled, y_train_split)
+
+
+# In[35]:
+
+
+# predict using the trained model -> run it on the test data that has been scaled
+clf_lg_predict = clf_lg_fit.predict(X_test_scaled)
+clf_lg_predict
+
+
+# In[36]:
+
+
+# accuracy_score(y_true, y_pred)
+accuracy_score(y_test_split, clf_lg_predict)
+
+
+# In[37]:
+
+
+# create dictionary to encode target variables
+di_target_encoding = {'Male': 0, 'Female': 1}
+
+
+# In[38]:
+
+
+# some of the metrics require the class labels to be encoded as numeric
+y_train_encoded_0_1 = y_train_split.replace(di_target_encoding)
+
+print(len(y_train_encoded_0_1))
+y_train_encoded_0_1[:5]
+
+
+# In[39]:
+
+
+# some of the metrics require the class labels to be encoded as numeric
+y_test_encoded_0_1 = y_test_split.replace(di_target_encoding)
+
+print(len(y_test_encoded_0_1))
+y_test_encoded_0_1
+
+
+# In[ ]:
+
+
+
+
+
+# In[40]:
+
+
+# https://towardsdatascience.com/grid-search-for-model-tuning-3319b259367e
+# https://towardsdatascience.com/logistic-regression-model-tuning-with-scikit-learn-part-1-425142e01af5
+
+# input parameters
+X_train = X_train_scaled
+y_train = y_train_encoded_0_1
+X_test = X_test_scaled
+y_test = y_test_encoded_0_1
+
+# instantiate model
+clf = LogisticRegression()
+
+
+# In[ ]:
+
+
+# create grid values in a dictionary
+grid_values = {'penalty': ['l1', 'l2'],'C':[0.0001,0.001,.009,0.01,.09,1,5,10,25]}
+
+# use grid search: based on classifier, search grid_values, cross-validate (5-fold)
+grid_clf_acc = GridSearchCV(clf, param_grid = grid_values, cv = 5, verbose = True, n_jobs = -1, scoring = 'precision')    # F1 0.09
+
+# fit the model to the training data
+grid_clf_acc.fit(X_train, y_train)
+
+# Predict values based on new parameters
+y_pred_acc = grid_clf_acc.predict(X_test)
+
+# New Model Evaluation metrics 
+print('Accuracy Score : ' + str(accuracy_score(y_test,y_pred_acc)))
+print('Precision Score : ' + str(precision_score(y_test,y_pred_acc)))
+print('Recall Score : ' + str(recall_score(y_test,y_pred_acc)))
+print('F1 Score : ' + str(f1_score(y_test,y_pred_acc)))
+print('Best estimator: ', grid_clf_acc.best_estimator_)
+print('Best parameters: ', grid_clf_acc.best_params_)
+
+
+# In[ ]:
+
+
+# =========================================================
+# Print out the Confusion Matrix
+# =========================================================
+
+# Logistic Regression (Grid Search) Confusion matrix
+cm = confusion_matrix(y_test,y_pred_acc, labels=[0, 1])
+
+ls_sorted_classes = sorted(set(di_target_encoding.keys()))
+print(ls_sorted_classes)
+print()
+
+plot_confusion_matrix(grid_clf_acc, X_test, y_test)  
+plt.xticks(rotation = 45) # Rotates X-Axis Ticks by 45-degrees
+plt.show()  
+print()
+
+plot_confusion_matrix(grid_clf_acc, X_test, y_test, display_labels=ls_sorted_classes)  
+plt.xticks(rotation = 45) # Rotates X-Axis Ticks by 45-degrees
+plt.show()  
+print()
+
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=ls_sorted_classes)
+disp.plot() 
+plt.xticks(rotation = 45) # Rotates X-Axis Ticks by 45-degrees
+print()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
